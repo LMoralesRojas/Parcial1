@@ -1,4 +1,4 @@
-package Parcial.PrimerParcial;
+package Parcial.PrimerParcial.Main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

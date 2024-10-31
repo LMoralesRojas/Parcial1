@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+@startuml
+actor Cliente as user
+
+package "Arquitectura de Sistema - Detección de Mutantes" {
+    cloud "Render (Cloud)" as cloud {
+        [API Mutante]
+    }
+
+    node "Servidor" as server {
+        [PersonaController]
+        [PersonaService]
+        [PersonaRepository]
+    }
+
+    node "Base de Datos" as db {
+        [DB H2]
+    }
+}
+
+user --> [API Mutante] : Solicitud HTTP (POST /mutantes, DELETE /delete/{id}, DELETE /deleteAll)
+[API Mutante] --> [PersonaController] : Redirige la solicitud
+
+note right of [PersonaController]
+    Métodos:
+    + crearMutante() : Crea un nuevo registro de mutante
+    + verificarMutante() : Verifica si el ADN corresponde a un mutante
+    + eliminarMutante() : Elimina un mutante por ID
+    + eliminarTodosMutantes() : Elimina todos los registros de mutantes
+end note
+
+[PersonaController] --> [PersonaService] : Llama a la lógica de negocio
+[PersonaService] --> [PersonaRepository] : Interactúa con la base de datos (save, deleteById, deleteAll)
+[PersonaRepository] --> [DB H2] : Realiza operaciones CRUD
+
+note right of cloud
+    Despliegue en Render:
+    - La API se hospeda en Render para acceso en línea
+    - Conexión a DB H2 para almacenamiento
+end note
+
+@enduml

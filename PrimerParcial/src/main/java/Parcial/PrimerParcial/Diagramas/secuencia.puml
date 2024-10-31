@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+@startuml
+actor Cliente as C
+
+C -> PersonaController : POST /mutant/ { "dna": [...] }
+PersonaController -> PersonaService : esMutante(dna)
+
+alt ADN es mutante
+    PersonaService -> PersonaService : confirmacionMutante(dna)
+    PersonaService -> PersonaRepository : save(Persona)
+    PersonaController <-- PersonaService : true
+    C <-- PersonaController : 200 OK
+else ADN no es mutante
+    PersonaService -> PersonaService : confirmacionMutante(dna)
+    PersonaService -> PersonaRepository : save(Persona)
+    PersonaController <-- PersonaService : false
+    C <-- PersonaController : 403 Forbidden
+end
+
+== Consulta de estadísticas ==
+
+C -> PersonaController : GET /stats
+PersonaController -> PersonaService : getEstadisticas()
+PersonaService -> PersonaRepository : countAll()
+PersonaService -> PersonaRepository : countMutantDna()
+PersonaController <-- PersonaService : {count_mutant_dna, count_human_dna, ratio}
+C <-- PersonaController : JSON respuesta
+
+@enduml

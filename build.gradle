@@ -52,6 +52,11 @@ tasks.named('test') {
 springBoot {
 	mainClass = 'Parcial.PrimerParcial.ExMansApplication'
 }
+jar {
+	manifest {
+		attributes 'Main-Class': 'Parcial.PrimerParcial.ExMansApplication'
+	}
+}
 
 ext {
 	set('snippetsDir', file("build/generated-snippets"))

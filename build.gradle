@@ -30,11 +30,10 @@ dependencies {
 	// Hibernate Envers Dependency
 	implementation 'org.hibernate:hibernate-envers:6.2.10.Final'
 
-	//MAPSTRUCT
+	// MAPSTRUCT
 	implementation 'org.mapstruct:mapstruct:1.5.5.Final'
 
 	annotationProcessor 'org.projectlombok:lombok', 'org.mapstruct:mapstruct-processor:1.5.5.Final'
-
 
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -43,15 +42,17 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-
-}
-jar {
-	manifest {
-		attributes 'Main-Class': 'Parcial.PrimerParcial.ExMansApplication'
-	}
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+// Configuración de la clase principal para Spring Boot
+springBoot {
+	mainClass = 'Parcial.PrimerParcial.ExMansApplication'
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
 }

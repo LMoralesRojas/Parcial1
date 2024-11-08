@@ -1,9 +1,6 @@
-FROM openjdk:17-jdk-slim
 
-WORKDIR /app
+FROM amazoncorretto:17-alpine-jdk
 
-COPY CompoDoker/prueba_1_0.jar app.jar
-
-EXPOSE 8080
+COPY build/libs/PrimerParcial-0.0.1-SNAPSHOT-plain.jar app.jar
 
 ENTRYPOINT ["java", "-jar", "/app.jar"]

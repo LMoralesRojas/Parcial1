@@ -46,6 +46,11 @@ dependencies {
 
 
 }
+jar {
+	manifest {
+		attributes 'Main-Class': 'Parcial.PrimerParcial.ExMansApplication'
+	}
+}
 
 tasks.named('test') {
 	useJUnitPlatform()

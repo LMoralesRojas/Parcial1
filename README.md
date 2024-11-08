@@ -96,3 +96,7 @@ go
 Copiar código
 
 Este `README.md` resume las funcionalidades, configuración y métodos
+
+LA URL PARA PROBAR TODOS LOS PATHS O RUTAS ANTES MENCIONADOS ES:
+
+https://parcial1-5.onrender.com/...
